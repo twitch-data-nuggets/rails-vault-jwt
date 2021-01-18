@@ -13,6 +13,8 @@ module Rails
     module JWT
       class Error < StandardError; end
 
+      class InvalidIssuer < StandardError; end
+
       class << self
         def configure
           @config = Config.new

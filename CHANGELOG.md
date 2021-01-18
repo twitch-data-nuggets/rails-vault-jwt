@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2021-01-18
+### Added
+- Added `valid_issuers` config item to allow restricting key lookups to specific issuers
+
 ## [0.1.2] - 2021-01-18
 ### Fixed
 - Fixed issuer key url

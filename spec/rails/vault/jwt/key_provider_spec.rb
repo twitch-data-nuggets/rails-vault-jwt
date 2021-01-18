@@ -42,6 +42,13 @@ RSpec.describe Rails::Vault::JWT::KeyProvider do
       }
     end
 
+    describe 'with valid_issuers set' do
+      it 'raises InvalidIssuer' do
+        allow(Rails::Vault::JWT.config).to receive(:valid_issuers).and_return(['http://no'])
+        expect { subject.keys issuer }.to raise_error(Rails::Vault::JWT::InvalidIssuer)
+      end
+    end
+
     describe 'with cache' do
       subject { described_class.new ActiveSupport::Cache::NullStore.new }
       it 'fetches and returns a JWKS' do

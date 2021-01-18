@@ -12,6 +12,8 @@ module Rails
         end
 
         def keys(issuer)
+          raise InvalidIssuer if JWT.config.valid_issuers.any? && !(JWT.config.valid_issuers.include? issuer)
+
           if @cache.respond_to?(:fetch)
             @cache.fetch("keys/#{issuer}", expires_in: 5.minutes) do
               fetch_keys issuer
