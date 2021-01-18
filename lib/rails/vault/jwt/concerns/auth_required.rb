@@ -20,7 +20,8 @@ module Rails
               render json: { errors: ['Not Authenticated'] }, status: :unauthorized
               nil
             end
-          rescue ::JWT::VerificationError, ::JWT::DecodeError
+          rescue ::JWT::VerificationError, ::JWT::DecodeError => e
+            JWT.config.logger.debug { "Error while verifying token: #{e}" }
             render json: { errors: ['Not Authenticated'] }, status: :unauthorized
           end
 
@@ -28,10 +29,16 @@ module Rails
 
           def http_token
             @http_token ||= (request.headers['Authorization'].split.last if request.headers['Authorization'].present?)
+            JWT.config.logger.debug { "@http_token => #{@http_token}" }
+
+            @http_token
           end
 
           def auth_token
             @auth_token ||= JWT::Decoder.decode(http_token)
+            JWT.config.logger.debug { "@auth_token => #{@auth_token}" }
+
+            @auth_token
           end
 
           def token_valid?

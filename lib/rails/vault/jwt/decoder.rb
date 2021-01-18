@@ -19,7 +19,8 @@ module Rails
                 jwks: key_provider.keys(issuer(token))
               }
             )[0])
-          rescue StandardError
+          rescue StandardError => e
+            JWT.config.logger.error "Error while decoding token: #{e}"
             nil
           end
 

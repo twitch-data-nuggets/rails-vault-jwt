@@ -7,8 +7,12 @@ module Rails
     module JWT
       class Config
         extend Forwardable
-        attr_accessor :cache
+        attr_accessor :cache, :logger
         attr_reader :token_provider
+
+        def initialize
+          @logger = defined?(Rails) && defined?(Rails.logger) ? Rails.logger : Logger.new($stdout)
+        end
 
         def token_provider=(value)
           @token_provider = if value.is_a? Class
