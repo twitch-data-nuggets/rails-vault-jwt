@@ -22,7 +22,7 @@ module Rails
         end
 
         def fetch_keys(issuer)
-          raw = Net::HTTP.get URI.parse(issuer)
+          raw = Net::HTTP.get URI.parse("#{issuer}/.well-known/keys")
           JSON.parse raw, symbolize_names: true
         end
       end
