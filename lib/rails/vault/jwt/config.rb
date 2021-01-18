@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+require 'forwardable'
+
+module Rails
+  module Vault
+    module JWT
+      class Config
+        extend Forwardable
+        attr_accessor :cache
+        attr_reader :token_provider
+
+        def token_provider=(value)
+          @token_provider = if value.is_a? Class
+                              value.new
+                            else
+                              value
+                            end
+        end
+
+        def_delegators :@token_provider, :token
+      end
+    end
+  end
+end
