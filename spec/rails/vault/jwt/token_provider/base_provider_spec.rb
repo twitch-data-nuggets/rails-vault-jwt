@@ -8,6 +8,27 @@ RSpec.describe Rails::Vault::JWT::TokenProvider::BaseProvider do
     it { expect(subject.auth).to be_nil }
   end
 
+  describe '#bearer_token' do
+    let(:token) { 'abc123' }
+    let(:secret) do
+      ::Vault::Secret.new({
+                            data: secret_data
+                          })
+    end
+    let(:secret_data) do
+      {
+        client_id: SecureRandom.uuid,
+        token: 'abc.123.foo',
+        ttl: 300
+      }
+    end
+
+    it 'fetches a bearer token' do
+      allow(subject.client.logical).to receive(:read).and_return(secret)
+      expect(subject.bearer_token).to be_a String
+    end
+  end
+
   describe '#token' do
     let(:token) { 'abc123' }
     let(:vault_auth) do

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2021-02-06
+### Added
+- Add #bearer_token method to use token to acquire a JWT
+
+### Changed
+- Prefix env vars with `VAULT_`
+
 ## [0.1.3] - 2021-01-18
 ### Added
 - Added `valid_issuers` config item to allow restricting key lookups to specific issuers

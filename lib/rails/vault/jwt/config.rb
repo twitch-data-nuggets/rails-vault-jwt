@@ -23,7 +23,7 @@ module Rails
                             end
         end
 
-        def_delegators :@token_provider, :token
+        def_delegators :@token_provider, :token, :bearer_token
       end
     end
   end

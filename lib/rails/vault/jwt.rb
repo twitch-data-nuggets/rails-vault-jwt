@@ -16,6 +16,8 @@ module Rails
       class InvalidIssuer < StandardError; end
 
       class << self
+        extend Forwardable
+
         def configure
           @config = Config.new
           yield(@config) if block_given?
@@ -25,6 +27,8 @@ module Rails
         def config
           @config || configure
         end
+
+        def_delegators :config, :token, :bearer_token
       end
     end
   end

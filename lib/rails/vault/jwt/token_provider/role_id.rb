@@ -8,8 +8,8 @@ module Rails
           def initialize(*args, mount_name: 'approle', role_id: nil, secret_id: nil, token_ttl: '5m')
             super
             @mount_name = mount_name
-            @role_id = role_id || ENV.fetch('ROLE_ID')
-            @secret_id = secret_id || ENV.fetch('SECRET_ID')
+            @role_id = role_id || ENV.fetch('VAULT_ROLE_ID')
+            @secret_id = secret_id || ENV.fetch('VAULT_SECRET_ID')
             @token_ttl = token_ttl
           end
 

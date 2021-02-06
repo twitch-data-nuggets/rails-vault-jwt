@@ -9,11 +9,16 @@ module Rails
         class BaseProvider
           attr_reader :expire_time
 
-          def initialize(*_args)
+          def initialize(*_args, bearer_role_name: nil, **_kwargs)
             @expire_time = DateTime.now
+            @bearer_role_name = bearer_role_name || ENV.fetch('VAULT_BEARER_ROLE', '')
           end
 
           def auth; end
+
+          def bearer_token
+            client.logical.read("identity/oidc/token/#{@bearer_role_name}")&.data[:token]
+          end
 
           def token
             unless token_valid?
