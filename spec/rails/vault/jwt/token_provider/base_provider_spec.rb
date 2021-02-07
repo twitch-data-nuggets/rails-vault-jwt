@@ -24,6 +24,7 @@ RSpec.describe Rails::Vault::JWT::TokenProvider::BaseProvider do
     end
 
     it 'fetches a bearer token' do
+      allow(subject).to receive(:token)
       allow(subject.client.logical).to receive(:read).and_return(secret)
       expect(subject.bearer_token).to be_a String
     end

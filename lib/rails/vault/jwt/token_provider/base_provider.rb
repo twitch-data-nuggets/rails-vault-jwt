@@ -17,6 +17,7 @@ module Rails
           def auth; end
 
           def bearer_token
+            token
             client.logical.read("identity/oidc/token/#{@bearer_role_name}")&.data[:token]
           end
 

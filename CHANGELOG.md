@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2021-02-07
+### Fixed
+- Calls token to get a new token if needed when calling bearer_token
+
 ## [0.2.0] - 2021-02-06
 ### Added
 - Add #bearer_token method to use token to acquire a JWT
